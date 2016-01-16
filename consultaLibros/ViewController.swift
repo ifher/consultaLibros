@@ -39,6 +39,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         self.ISBN.delegate = self
+        
+        //ponemos un ejemplo en la caja para que se pueda comprobar
         ISBN.text = "978-84-376-0494-7"
         
     }
