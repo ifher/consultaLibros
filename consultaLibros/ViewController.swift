@@ -22,8 +22,25 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let datos: NSData? = NSData(contentsOfURL: url!)
         
         if datos != nil {
-            let texto = NSString (data: datos!, encoding: NSUTF8StringEncoding)
-            textResponse.text = String(texto)
+            do{
+                var resultado : String = ""
+                let json = try NSJSONSerialization.JSONObjectWithData(datos!, options: NSJSONReadingOptions.MutableLeaves)
+                let att = "ISBN:"+isbnTexto
+                let dic = json[att] as! NSDictionary
+                resultado = "Título:\n" + String(dic["title"] as! NSString) + "\n\n"
+                
+                resultado.appendContentsOf("Autores:\n")
+                
+                for autor in Array(dic["authors"] as! NSArray){
+                    resultado.appendContentsOf(autor["name"] as! NSString as String)
+                }
+                
+                textResponse.text = String(resultado)
+            }catch _ {
+                
+            }
+            
+            
         }else{
             let alertController = UIAlertController(title: "Error", message: "Ha habido un problema conectando con el servidor. Revisa tu conexión a internet y vuelve a intentarlo.", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Aceptar", style: UIAlertActionStyle.Default,handler: nil))
