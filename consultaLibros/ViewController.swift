@@ -12,10 +12,18 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var ISBN: UITextField!
     @IBOutlet weak var textResponse: UITextView!
+    @IBOutlet weak var portada: UIImageView!
+    
+    // ISBNs de prueba
+    // imagen -> 9780373119684
+    // normal -> 978-84-376-0494-7
+    
     
     func consultaLibro() {
+        
         let isbnTexto: String = ISBN.text!
         textResponse.text = ""
+        portada.image = nil
         
         let urls = "https://openlibrary.org/api/books?jscmd=data&format=json&bibkeys=ISBN:" + isbnTexto
         let url = NSURL(string: urls)
@@ -36,8 +44,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 textResponse.text = String(resultado)
-            }catch _ {
                 
+                let cover = dic["cover"]
+                if cover != nil && cover is NSDictionary{
+                    let covers = dic["cover"] as! NSDictionary
+                    
+                    let imgUrl = NSURL(string: covers["medium"] as! NSString as String)
+                    let data = NSData(contentsOfURL: imgUrl!)
+                    portada.image = UIImage(data: data!)
+                    
+                }
+                
+                
+            }catch _ {                
             }
             
             

@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -37,28 +38,68 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ybB-0c-AES">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ybB-0c-AES" secondAttribute="bottom" constant="115" id="3Gf-BZ-XZN"/>
+                            <constraint firstItem="ybB-0c-AES" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6nW-5d-bRD"/>
                             <constraint firstItem="Bda-hl-EfU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ens-w1-1Kr"/>
-                            <constraint firstItem="Bda-hl-EfU" firstAttribute="top" secondItem="ayE-nj-YSs" secondAttribute="bottom" constant="26" id="KFd-yj-t6m"/>
+                            <constraint firstItem="Bda-hl-EfU" firstAttribute="top" secondItem="ayE-nj-YSs" secondAttribute="bottom" constant="26" id="KFd-yj-t6m">
+                                <variation key="widthClass=compact" constant="1"/>
+                            </constraint>
                             <constraint firstItem="w5C-9W-Foc" firstAttribute="leading" secondItem="Bda-hl-EfU" secondAttribute="leading" id="LHa-LS-pig"/>
                             <constraint firstItem="w5C-9W-Foc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OVW-xd-l1v"/>
-                            <constraint firstItem="ayE-nj-YSs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="VrG-DZ-OSS"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="w5C-9W-Foc" secondAttribute="bottom" constant="178" id="ZGi-eR-arL"/>
-                            <constraint firstItem="w5C-9W-Foc" firstAttribute="top" secondItem="Bda-hl-EfU" secondAttribute="bottom" constant="23" id="ZcC-Jj-1G5"/>
-                            <constraint firstItem="Bda-hl-EfU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="61" id="mzC-ne-DAs"/>
+                            <constraint firstItem="ayE-nj-YSs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="VrG-DZ-OSS">
+                                <variation key="widthClass=compact" constant="0.0"/>
+                            </constraint>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="w5C-9W-Foc" secondAttribute="bottom" constant="178" id="ZGi-eR-arL">
+                                <variation key="widthClass=compact" constant="317"/>
+                            </constraint>
+                            <constraint firstItem="w5C-9W-Foc" firstAttribute="top" secondItem="Bda-hl-EfU" secondAttribute="bottom" constant="23" id="ZcC-Jj-1G5">
+                                <variation key="widthClass=compact" constant="8"/>
+                            </constraint>
+                            <constraint firstItem="ybB-0c-AES" firstAttribute="top" secondItem="w5C-9W-Foc" secondAttribute="bottom" constant="19" id="jzB-Nu-Ejo"/>
+                            <constraint firstItem="ybB-0c-AES" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="l5c-qT-4Tg"/>
+                            <constraint firstItem="Bda-hl-EfU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="61" id="mzC-ne-DAs">
+                                <variation key="widthClass=compact" constant="28"/>
+                            </constraint>
                             <constraint firstItem="ayE-nj-YSs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xOF-Ut-JbH"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="ybB-0c-AES"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="6nW-5d-bRD"/>
+                                <exclude reference="jzB-Nu-Ejo"/>
+                                <exclude reference="l5c-qT-4Tg"/>
+                                <exclude reference="3Gf-BZ-XZN"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="ybB-0c-AES"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="6nW-5d-bRD"/>
+                                <include reference="jzB-Nu-Ejo"/>
+                                <include reference="l5c-qT-4Tg"/>
+                                <include reference="3Gf-BZ-XZN"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="ISBN" destination="Bda-hl-EfU" id="mBg-u4-iFx"/>
+                        <outlet property="portada" destination="ybB-0c-AES" id="Qsu-Ux-umh"/>
                         <outlet property="textResponse" destination="w5C-9W-Foc" id="q1z-uZ-Vcm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="429"/>
+            <point key="canvasLocation" x="304.5" y="429"/>
         </scene>
     </scenes>
 </document>
