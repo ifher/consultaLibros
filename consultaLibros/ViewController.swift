@@ -21,7 +21,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     func consultaLibro() {
         
-        let isbnTexto: String = ISBN.text!
+        //limpiamos de carácteres de espacio
+        let isbnTexto: String = ISBN.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
         textResponse.text = ""
         portada.image = nil
         
@@ -33,28 +34,35 @@ class ViewController: UIViewController, UITextFieldDelegate {
             do{
                 var resultado : String = ""
                 let json = try NSJSONSerialization.JSONObjectWithData(datos!, options: NSJSONReadingOptions.MutableLeaves)
-                let att = "ISBN:"+isbnTexto
-                let dic = json[att] as! NSDictionary
-                resultado = "Título:\n" + String(dic["title"] as! NSString) + "\n\n"
-                
-                resultado.appendContentsOf("Autores:\n")
-                
-                for autor in Array(dic["authors"] as! NSArray){
-                    resultado.appendContentsOf(autor["name"] as! NSString as String)
-                }
-                
-                textResponse.text = String(resultado)
-                
-                let cover = dic["cover"]
-                if cover != nil && cover is NSDictionary{
-                    let covers = dic["cover"] as! NSDictionary
+
+                //comprobamos que el resultado no está vacío, si viene vacío es que el ISBN no existe
+                if(json.count != 0) {
                     
-                    let imgUrl = NSURL(string: covers["medium"] as! NSString as String)
-                    let data = NSData(contentsOfURL: imgUrl!)
-                    portada.image = UIImage(data: data!)
-                    
-                }
+                    let att = "ISBN:"+isbnTexto
+                    let dic = json[att] as! NSDictionary
+                    resultado = "Título:\n" + String(dic["title"] as! NSString) + "\n\n"
                 
+                    resultado.appendContentsOf("Autores:\n")
+                
+                    for autor in Array(dic["authors"] as! NSArray){
+                        resultado.appendContentsOf(autor["name"] as! NSString as String)
+                    }
+                
+                    textResponse.text = String(resultado)
+                
+                    let cover = dic["cover"]
+                    if cover != nil && cover is NSDictionary{
+                        let covers = dic["cover"] as! NSDictionary
+                    
+                        let imgUrl = NSURL(string: covers["medium"] as! NSString as String)
+                        let data = NSData(contentsOfURL: imgUrl!)
+                        portada.image = UIImage(data: data!)
+                    
+                    }
+                }else{
+                    textResponse.text = "El ISBN proporcionado no existe."
+                }
+            
                 
             }catch _ {                
             }
